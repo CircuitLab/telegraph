@@ -5,11 +5,11 @@
 
 var express = require('express')
   , routes = require('./routes')
-  , user = require('./routes/user')
   , http = require('http')
   , path = require('path');
 
 var app = express();
+var pkg = require('./package');
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -20,8 +20,10 @@ app.use(express.logger('dev'));
 app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(app.router);
-  app.use(require('stylus').middleware(__dirname + '/public'));
+app.use(require('stylus').middleware(__dirname + '/public'));
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.locals.title = pkg.title;
 
 // development only
 if ('development' == app.get('env')) {
@@ -29,8 +31,12 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
-app.get('/users', user.list);
 
-http.createServer(app).listen(app.get('port'), function(){
+app.get('/trials/:id');
+
+app.post('/trials/:id/pictures', function(req, res) {
+});
+
+http.createServer(app).listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));
 });
