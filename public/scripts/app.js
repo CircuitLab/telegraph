@@ -30,7 +30,7 @@ $(document).ready(function(){
     var message = info.message;
 
     //TODO 終了した時の処理
-    setInterval(funciton(){
+    setInterval(function(){
       socket.emit('semaphoreEnd');
     }, 2000);
   });
