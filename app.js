@@ -6,7 +6,9 @@
 var express = require('express')
   , routes = require('./routes')
   , http = require('http')
-  , path = require('path');
+  , path = require('path')
+  , io = require('socket.io')
+  , Mediator = require('./lib/mediator');
 
 var app = express();
 var pkg = require('./package');
@@ -30,13 +32,17 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', routes.index);
+app.get('/', routes.front.index);
 
-app.get('/trials/:id');
 
-app.post('/trials/:id/pictures', function(req, res) {
-});
+app.get('/admin', routes.admin.index);
+// app.get('/trials/:id');
 
-http.createServer(app).listen(app.get('port'), function() {
+// app.post('/trials/:id/pictures', function(req, res) {
+// });
+
+var server = http.createServer(app).listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));
 });
+var socket = io.listen(server);
+var mediator = new Mediator(socket);

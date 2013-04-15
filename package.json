@@ -11,6 +11,9 @@
     "stylus": "*",
     "osc-emitter": "https://github.com/CircuitLab/osc-emitter/archive/master.tar.gz",
     "socket.io": "~0.9.14",
-    "tumblr": "~0.1.1"
+    "tumblr": "~0.1.1",
+    "osc-min": "0.0.9",
+    "socket.io-client": "~0.9.11",
+    "underscore": "~1.4.4"
   }
 }
