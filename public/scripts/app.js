@@ -1,54 +1,80 @@
 $(document).ready(function(){
-  // ここに処理を記述します
   var socket = io.connect();
   //socket.emit('connection', {});
+  var $front = $('#front');
+  var $input = $('#input');
+  var $semaphore = $('#semaphore ');
+  var $end = $('#end');
+  var $qrcode = $('#qrcode');
+  var $url = $('#url');
+  var $a = $('a');
+  var $form = $('form');
+  var $inputText = $('input[type="text"]');
+  var $input = $('#input');
+  //var info = undefined;
 
-  $('a').on('click touchEnd',function(){
+  $a.on('click touchEnd',function(){
     var href = $(this).attr('href');
-    socket.emit(href, {});
+    socket.emit(href);
     return false;
   });
 
-  $('form').on('submit', function(){
+  $form.on('submit', function(){
     var value = $(this).serializeArray();
     var action = $(this).attr('action');
     socket.emit(action, {
       message: value
     });
-    //console.log(values);
+    $inputText.val('');
     return false;
   })
 
-  //TODO #inputを表示
   socket.on('input',function(){
-    
+    showOnly($input);
   });
 
-  //TODO #semaphoreを実装
-  socket.on('semaphoreStart', function(info){
-    
-    var message = info.message;
-
-    //TODO 終了した時の処理
-    setInterval(function(){
-      socket.emit('semaphoreEnd');
-    }, 2000);
+  socket.on('semaphoreStart', function(value){
+    //info = dataInfo;
+    //console.log(info);
+    showOnly($semaphore);
+    showLetter(value);
   });
 
-
-  //TODO #thanksを表示
-  socket.on('thanks',function(info){
-
+  socket.on('/states/captured', function(done, next){
+    console.log('next:',next);
+    showOnly($semaphore);
+    showLetter(next);
   });
 
-  //TODO shareした時の画面を表示する
-  socket.on('share',function(info){
-
+  socket.on('semaphoreEnd', function(info){
+    var url = info.url;
+    var qrcode = info.qrcode;
+    $url.html(url);
+    $qrcode.attr('src', qrcode);
+    showOnly($end);
   });
 
-  //TODO 初期画面に戻る。
+  socket.on('share', function(info){
+    alert('shareしました。');
+  });
+
   socket.on('end',function(info){
-
+    info = undefined;
+    showOnly($front);
   });
+
+  function showOnly($visible){
+    $front.hide();
+    $input.hide();
+    $semaphore.hide();
+    $end.hide();
+    $visible.show();
+  }
+
+  function showLetter(letter){
+    $('.letter').hide();
+    $('#'+letter).show();
+  }
+
 
 });

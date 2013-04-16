@@ -46,3 +46,14 @@ var server = http.createServer(app).listen(app.get('port'), function() {
 });
 var socket = io.listen(server);
 var mediator = new Mediator(socket);
+
+app.post('/plays/:timestamp/pictures', function(req, res){
+  //TODO gifの保存
+  //mimetypeで jpg gifで振り分け
+  var file = req.files.upfile;
+  console.log('file.path:',file.path);
+  console.log('req.files', req.files);
+  res.send(200);
+  mediator.uploaded();
+});
+

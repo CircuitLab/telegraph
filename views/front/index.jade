@@ -1,17 +1,17 @@
 extends ../layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-  #front 
-    a(href='start') Start
+  #front
+    h1= title
+    p Welcome to #{title} 
+    a(href='start', id="start") Start
   #input
     form(method='post', action='message')
       input(type='text', name='message')
       input(type='submit', value='OK',class='submit')
   #semaphore 
     -letters.forEach(function(letter){
-      div.letter(value=letter) 
+      div.letter(value=letter, id=letter) 
         =letter
     -});
   #end
@@ -20,10 +20,10 @@ block content
       br
       記念にお持ち帰り下さい
     div.generatedLink
-      span
-        https://www.google.co.jp/
+      span(id='url')
+        https://www.hoge.co.jp/
       div.qr
-        img(src='http://presen.php-web.net/wp-content/uploads/2009/02/chart.png')
+        img(src='', id='qrcode')
     div.control
       a(href='share')
         サイトへ投稿
