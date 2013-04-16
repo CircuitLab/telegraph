@@ -1,0 +1,31 @@
+extends ../layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  #front 
+    a(href='start') Start
+  #input
+    form(method='post', action='message')
+      input(type='text', name='message')
+      input(type='submit', value='OK',class='submit')
+  #semaphore 
+    -letters.forEach(function(letter){
+      div.letter(value=letter) 
+        =letter
+    -});
+  #end
+    div.thanks
+      ありがとうございました
+      br
+      記念にお持ち帰り下さい
+    div.generatedLink
+      span
+        https://www.google.co.jp/
+      div.qr
+        img(src='http://presen.php-web.net/wp-content/uploads/2009/02/chart.png')
+    div.control
+      a(href='share')
+        サイトへ投稿
+      a(href='end')
+        終了
