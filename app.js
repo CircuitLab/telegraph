@@ -8,7 +8,10 @@ var express = require('express')
   , http = require('http')
   , path = require('path')
   , io = require('socket.io')
-  , Mediator = require('./lib/mediator');
+  , Mediator = require('./lib/mediator')
+  , models = require('../models')
+  , Play = models.Play
+  , db = models.db;
 
 var app = express();
 var pkg = require('./package');
@@ -33,8 +36,7 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.front.index);
-
-
+app.get('/plays/:timestamp', routes.play.show);
 app.get('/admin', routes.admin.index);
 // app.get('/trials/:id');
 
@@ -51,9 +53,18 @@ app.post('/plays/:timestamp/pictures', function(req, res){
   //TODO gifの保存
   //mimetypeで jpg gifで振り分け
   var file = req.files.upfile;
-  // console.log('file.path:',file.path);
-  console.log('req.files', req.files);
-  res.send(200);
-  mediator.uploaded();
-});
+  var timestamp = req.query['timestamp'];
 
+  //TODO fileを読み込んでdbに保存
+  Play.findOne({timestamp: timestamp}, function(err, play){
+    play.frames = 'frames';
+    play.animation = 'animation';
+    play.save(function(err, play){
+      if(err){return}
+      
+      console.log('req.files', req.files);
+      mediator.semaphoreEnd(play.timestamp);
+      res.send(200);
+    });
+  });
+});

@@ -10,9 +10,9 @@ var Schema = require('mongoose').Schema
  */
 
 var Play = module.exports = new Schema({
-  url: String,
+  tumblr: String,
   animation: Buffer,
   frames: [Buffer],
   timestamp: Number,
-  created:   { type: Date, default: Date.now, index: true }
+  created: { type: Date, default: Date.now, index: true },
 });

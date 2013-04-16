@@ -1,6 +1,6 @@
 $(document).ready(function(){
   var socket = io.connect();
-  //socket.emit('connection', {});
+  var qrSize = 300;
   var $front = $('#front');
   var $input = $('#input');
   var $semaphore = $('#semaphore ');
@@ -11,7 +11,6 @@ $(document).ready(function(){
   var $form = $('form');
   var $inputText = $('input[type="text"]');
   var $input = $('#input');
-  //var info = undefined;
 
   $a.on('click touchEnd',function(){
     var href = $(this).attr('href');
@@ -34,32 +33,30 @@ $(document).ready(function(){
   });
 
   socket.on('semaphoreStart', function(value){
-    //info = dataInfo;
-    //console.log(info);
     showOnly($semaphore);
     showLetter(value);
   });
 
   socket.on('/states/captured', function(done, next){
-    console.log('next:',next);
     showOnly($semaphore);
     showLetter(next);
   });
 
-  //TODO url
-  socket.on('semaphoreEnd', function(){
-    // var url = info.url;
+  //TODO qrcodeは googleを使う
+  socket.on('semaphoreEnd', function(url){
+    var url = url;
     // var qrcode = info.qrcode;
-    // $url.html(url);
-    // $qrcode.attr('src', qrcode);
+    $url.html(url);
+    var qrcode = 'http://chart.apis.google.com/chart?chs='+qrSize+'x'+qrSize+'&cht=qr&chl=http://'+location.host;
+    $qrcode.attr('src', qrcode);
     showOnly($end);
   });
 
-  socket.on('share', function(info){
+  socket.on('shared', function(info){
     alert('shareしました。');
   });
 
-  socket.on('end',function(info){
+  socket.on('ended',function(info){
     info = undefined;
     showOnly($front);
   });
@@ -76,6 +73,5 @@ $(document).ready(function(){
     $('.letter').hide();
     $('#'+letter).show();
   }
-
 
 });
