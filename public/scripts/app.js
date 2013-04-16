@@ -46,11 +46,12 @@ $(document).ready(function(){
     showLetter(next);
   });
 
-  socket.on('semaphoreEnd', function(info){
-    var url = info.url;
-    var qrcode = info.qrcode;
-    $url.html(url);
-    $qrcode.attr('src', qrcode);
+  //TODO url
+  socket.on('semaphoreEnd', function(){
+    // var url = info.url;
+    // var qrcode = info.qrcode;
+    // $url.html(url);
+    // $qrcode.attr('src', qrcode);
     showOnly($end);
   });
 
