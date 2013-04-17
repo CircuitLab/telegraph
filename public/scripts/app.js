@@ -44,7 +44,16 @@ $(document).ready(function(){
   });
 
   $form.on('submit', function(){
+
     var value = $(this).serializeArray();
+    var text = $inputText.val();
+    console.log('text:',text);
+    console.log('value:',value);
+    if( (/^\s/.test(text)) || text.length == 0 ){
+      alert('何か入力して下さい。');
+      return false;
+    }
+
     //var action = $(this).attr('action');
     socket.emit('message', {
       message: value
@@ -52,6 +61,27 @@ $(document).ready(function(){
     $inputText.val('');
     return false;
   })
+
+  $inputText.keypress(function(e){
+    var backSpace = 8;
+    var enter = 13;
+    var inputed = String.fromCharCode(e.keyCode);
+    console.log(e.keyCode);
+    if(e.keyCode == backSpace){
+      return true;
+    }
+    if(e.keyCode == enter){
+      return true;
+    }
+
+    if(/[a-zA-Z ]/.test(inputed)){
+      console.log('いい：',inputed);
+    }else{
+      console.log('だめ：',inputed);
+      alert('アルファベットかスペースで入力してください。');
+      return false;
+    }
+  });
 
   socket.on('input',function(){
     showOnly($input);
@@ -67,9 +97,8 @@ $(document).ready(function(){
     showLetter(next);
   });
 
-  //TODO qrcodeは googleを使う
   socket.on('semaphoreEnd', function(path, timestamp){
-    var url = 'http://' + location.host + path;
+    var url = 'http://teba.uniba.jp' +  + path;
     // var qrcode = info.qrcode;
     $url.html(url);
     $shareButton.attr('timestamp', timestamp);
