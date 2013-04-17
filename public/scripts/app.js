@@ -75,8 +75,7 @@ $(document).ready(function(){
     socket.emit('end');
   });
 
-  socket.on('ended',function(info){
-    info = undefined;
+  socket.on('ended',function(){
     showOnly($front);
   });
 
