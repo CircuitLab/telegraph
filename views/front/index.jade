@@ -2,32 +2,47 @@ extends ../layout
 
 block content
   #front
-    h1= title
-    p Welcome to #{title} 
-    a(href='start', id="startButton") Start
+    .content
+      #hand
+        img#handImg(src='/img/hand@2x.png')
+      #title
+        テバタイプ
+      a#startButton(href='start')
+        img#startBtnImg(src='/img/startBtn@2x.png')
   #input
-    form(method='post', action='message')
-      input(type='text', name='message')
-      input(type='submit', value='OK',class='submit')
+    .content
+      #instruct
+        メッセージを入力してください。
+      #restriction
+       （10文字まで）
+      form(method='post', action='message')
+        #inputArea
+          input#inputText(type='text', name='message', maxlength='10')
+        #okBtn
+          input#okImg(src='/img/okBtn@2x.png', type='image')
   #semaphore 
-    -letters.forEach(function(letter){
-      div.letter(value=letter, id=letter) 
-        =letter
-    -});
+    .content
+      -letters.forEach(function(letter){
+        div.letter(value=letter, id=letter) 
+          =letter
+      -});
   #end
-    div.thanks
-      ありがとうございました
-      br
-      記念にお持ち帰り下さい
-    div.generatedLink
-      span(id='url')
-        https://www.hoge.co.jp/
-      div.qr
-        img(src='', id='qrcode')
-    div.control
-      div
-        a(href='share', id='shareButton')
-          サイトへ投稿
-      div
-        a(href='end', id='endButton')
-          終了
+    .content
+      #thanks.thanks
+        ありがとうございました
+      #guidance
+        以下のアドレスから画像を確認出来ます。
+      .generatedLink
+        #url
+          http://exsample.com
+        .qr
+          img#qrImg(src='')
+
+      .control
+        a#shareButton(href='share')
+          img#shareBtnImg(src='/img/shareBtn@2x.png')
+        a#endButton(href='end')
+          img#endBtnImg(src='/img/endBtn@2x.png')
+
+
+

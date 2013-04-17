@@ -1,11 +1,16 @@
+//scrollのバウンドを消す
+document.ontouchmove = function(event){
+    event.preventDefault();
+};
+
 $(document).ready(function(){
   var socket = io.connect();
   var qrSize = 300;
   var $front = $('#front');
   var $input = $('#input');
-  var $semaphore = $('#semaphore ');
+  var $semaphore = $('#semaphore');
   var $end = $('#end');
-  var $qrcode = $('#qrcode');
+  var $qrImg = $('#qrImg');
   var $url = $('#url');
   var $startButton = $('#startButton');
   var $shareButton = $('#shareButton');
@@ -30,8 +35,6 @@ $(document).ready(function(){
     socket.emit('end');
     return false;
   });
-
-  
 
   $form.on('submit', function(){
     var value = $(this).serializeArray();
@@ -64,7 +67,7 @@ $(document).ready(function(){
     $url.html(url);
     $shareButton.attr('timestamp', timestamp);
     var qrcode = 'http://chart.apis.google.com/chart?chs='+qrSize+'x'+qrSize+'&cht=qr&chl='+url;
-    $qrcode.attr('src', qrcode);
+    $qrImg.attr('src', qrcode);
     showOnly($end);
   });
 
