@@ -20,18 +20,24 @@ $(document).ready(function(){
   var $input = $('#input');
   var $okBtn = $('#okBtn');
 
-  $startButton.on('click touchEnd',function(){
+  $startButton.on('click',function(){
     socket.emit('start');
     return false;
   });
 
-  $shareButton.on('click touchEnd',function(){
+  $shareButton.on('click',function(){
+    if($(this).hasClass('disabled')){ return false;};
+
     var timestamp = $(this).attr('timestamp');
+    $endButton.addClass('disabled');
+    $shareButton.addClass('disabled');
     socket.emit('share', timestamp);
     return false;
   });
 
-  $endButton.on('click touchEnd',function(){
+  $endButton.on('click',function(){
+    if($(this).hasClass('disabled')){ return false;};
+
     console.log('href:',$(this).attr('href'));
     socket.emit('end');
     return false;
@@ -74,15 +80,20 @@ $(document).ready(function(){
 
   socket.on('shared', function(isSuccess){
     if(isSuccess){
+
       alert('shareしました。');
     }else{
       //alert('');
       console.error('share error');
     }
+    $shareButton.addClass('disabled');
+    $endButton.removeClass('disabled');
     //socket.emit('end');
   });
 
   socket.on('ended',function(){
+    $shareButton.removeClass('disabled');
+    $endButton.removeClass('disabled');
     showOnly($front);
   });
 
