@@ -60,9 +60,9 @@ app.post('/plays/:timestamp/pictures', function(req, res){
   var files = req.files;
   var animation;
   var frames = [];
-  
+  var timestamp = req.query['timestamp'];
+
   Object.keys(files).forEach(function(file) { 
-    var timestamp = req.query['timestamp'];
     var fileInfo = files[file];
     var path = fileInfo['path'];
     var buf = fs.readFileSync(path);
