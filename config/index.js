@@ -8,7 +8,6 @@ var fs = require('fs')
   , env = require('../lib/env')
   , config = {};
 
-console.log(__dirname);
 fs.readdirSync(__dirname).forEach(function(filename) {
   if (!/\.json/.test(filename)) return;
   var name = path.basename(filename, '.json');

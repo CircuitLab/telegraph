@@ -7,16 +7,33 @@ $(document).ready(function(){
   var $end = $('#end');
   var $qrcode = $('#qrcode');
   var $url = $('#url');
-  var $a = $('a');
+  var $startButton = $('#startButton');
+  var $shareButton = $('#shareButton');
+  var $endButton = $('#endButton');
   var $form = $('form');
   var $inputText = $('input[type="text"]');
   var $input = $('#input');
 
-  $a.on('click touchEnd',function(){
+  $startButton.on('click touchEnd',function(){
     var href = $(this).attr('href');
     socket.emit(href);
     return false;
   });
+
+  $shareButton.on('click touchEnd',function(){
+    var href = $(this).attr('href');
+    var timestamp = $(this).attr('timestamp');
+    socket.emit(href, timestamp);
+    return false;
+  });
+
+  $endButton.on('click touchEnd',function(){
+    var href = $(this).attr('href');
+    socket.emit(href);
+    return false;
+  });
+
+  
 
   $form.on('submit', function(){
     var value = $(this).serializeArray();
@@ -43,11 +60,12 @@ $(document).ready(function(){
   });
 
   //TODO qrcodeは googleを使う
-  socket.on('semaphoreEnd', function(url){
-    var url = url;
+  socket.on('semaphoreEnd', function(path, timestamp){
+    var url = 'http://' + location.host + path;
     // var qrcode = info.qrcode;
     $url.html(url);
-    var qrcode = 'http://chart.apis.google.com/chart?chs='+qrSize+'x'+qrSize+'&cht=qr&chl=http://'+location.host;
+    $shareButton.attr('timestamp', timestamp);
+    var qrcode = 'http://chart.apis.google.com/chart?chs='+qrSize+'x'+qrSize+'&cht=qr&chl='+url;
     $qrcode.attr('src', qrcode);
     showOnly($end);
   });
