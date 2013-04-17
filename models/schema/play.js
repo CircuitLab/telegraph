@@ -18,7 +18,7 @@ var Play = module.exports = new Schema({
   created: { type: Date, default: Date.now, index: true },
 });
 
-Play.methods.photoPath = function photoPath(){
-  var path = '/plays/'+ this.timestamp +'/animation'
-  return path;
+Play.methods.gifUrl = function(){
+  var url = 'http://teba.uniba.jp/plays/'+ this.timestamp +'/animation'
+  return url;
 };
