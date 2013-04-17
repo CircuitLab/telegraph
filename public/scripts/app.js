@@ -18,9 +18,15 @@ $(document).ready(function(){
   var $form = $('form');
   var $inputText = $('input[type="text"]');
   var $input = $('#input');
+  var $submit = $('input[type=image]');
 
   $startButton.on('click touchEnd',function(){
     socket.emit('start');
+    return false;
+  });
+  
+  $submit.on('click', function(e) {
+    $(this).parents('form').trigger('submit');
     return false;
   });
 
