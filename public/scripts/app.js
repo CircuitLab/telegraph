@@ -18,6 +18,7 @@ $(document).ready(function(){
   var $form = $('form');
   var $inputText = $('input[type="text"]');
   var $input = $('#input');
+  var $okBtn = $('#okBtn');
 
   $startButton.on('click touchEnd',function(){
     socket.emit('start');
@@ -38,8 +39,8 @@ $(document).ready(function(){
 
   $form.on('submit', function(){
     var value = $(this).serializeArray();
-    var action = $(this).attr('action');
-    socket.emit(action, {
+    //var action = $(this).attr('action');
+    socket.emit('message', {
       message: value
     });
     $inputText.val('');
