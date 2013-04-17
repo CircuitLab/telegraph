@@ -72,6 +72,7 @@ $(document).ready(function(){
 
   socket.on('shared', function(info){
     alert('shareしました。');
+    socket.emit('end');
   });
 
   socket.on('ended',function(info){
