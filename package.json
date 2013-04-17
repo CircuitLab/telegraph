@@ -17,6 +17,7 @@
     "mongoose": "~3.6.5",
     "morph": "~0.2.0",
     "mime": "~1.2.9",
-    "tumblrwks": "https://github.com/prinum/tumblrwks/archive/master.tar.gz"
+    "tumblrwks": "https://github.com/prinum/tumblrwks/archive/master.tar.gz",
+    "validator": "~1.0.0"
   }
 }
