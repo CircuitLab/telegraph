@@ -65,8 +65,9 @@ app.post('/plays/:timestamp/pictures', function(req, res){
   Object.keys(files).forEach(function(file) { 
     var fileInfo = files[file];
     var path = fileInfo['path'];
+    var name = fileInfo['name'];
     var buf = fs.readFileSync(path);
-    console.log('mime.lookup(path):'+mime.lookup(path));
+    console.log('mime.lookup(name):'+mime.lookup(name));
     if(mime.lookup(path) == 'image/gif' ){
       animation = buf;
     }else{
