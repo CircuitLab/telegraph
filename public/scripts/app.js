@@ -70,9 +70,14 @@ $(document).ready(function(){
     showOnly($end);
   });
 
-  socket.on('shared', function(info){
-    alert('shareしました。');
-    socket.emit('end');
+  socket.on('shared', function(isSuccess){
+    if(isSuccess){
+      alert('shareしました。');
+    }else{
+      //alert('');
+      console.error('share error');
+    }
+    //socket.emit('end');
   });
 
   socket.on('ended',function(){
