@@ -9,8 +9,9 @@ exports.show = function(req, res) {
 };
 
 exports.animation = function(req, res){
-  var timestamp = req.query['timestamp'];
+  var timestamp = req.params.timestamp;
   Play.findOne({timestamp: timestamp}, function(err, play){
+    if(err) return res.send(404);
     res.type('gif');
     res.send(play.animation);
   });
