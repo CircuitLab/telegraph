@@ -4,7 +4,7 @@ block content
   #front
     h1= title
     p Welcome to #{title} 
-    a(href='start', id="start") Start
+    a(href='start', id="startButton") Start
   #input
     form(method='post', action='message')
       input(type='text', name='message')
@@ -25,7 +25,9 @@ block content
       div.qr
         img(src='', id='qrcode')
     div.control
-      a(href='share')
-        サイトへ投稿
-      a(href='end')
-        終了
+      div
+        a(href='share', id='shareButton')
+          サイトへ投稿
+      div
+        a(href='end', id='endButton')
+          終了

@@ -16,6 +16,7 @@
     "socket.io-client": "~0.9.11",
     "underscore": "~1.4.4",
     "mongoose": "~3.6.5",
-    "morph": "~0.2.0"
+    "morph": "~0.2.0",
+    "mime": "~1.2.9"
   }
 }

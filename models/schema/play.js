@@ -10,9 +10,15 @@ var Schema = require('mongoose').Schema
  */
 
 var Play = module.exports = new Schema({
-  url: String,
+  tumblr: String,
   animation: Buffer,
   frames: [Buffer],
   timestamp: Number,
-  created:   { type: Date, default: Date.now, index: true }
+  message: String,
+  created: { type: Date, default: Date.now, index: true },
 });
+
+Play.methods.photoPath = function photoPath(){
+  var path = '/plays/'+ this.timestamp +'/animation'
+  return path;
+};

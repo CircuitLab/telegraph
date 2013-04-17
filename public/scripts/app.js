@@ -1,23 +1,39 @@
 $(document).ready(function(){
   var socket = io.connect();
-  //socket.emit('connection', {});
+  var qrSize = 300;
   var $front = $('#front');
   var $input = $('#input');
   var $semaphore = $('#semaphore ');
   var $end = $('#end');
   var $qrcode = $('#qrcode');
   var $url = $('#url');
-  var $a = $('a');
+  var $startButton = $('#startButton');
+  var $shareButton = $('#shareButton');
+  var $endButton = $('#endButton');
   var $form = $('form');
   var $inputText = $('input[type="text"]');
   var $input = $('#input');
-  //var info = undefined;
 
-  $a.on('click touchEnd',function(){
+  $startButton.on('click touchEnd',function(){
     var href = $(this).attr('href');
     socket.emit(href);
     return false;
   });
+
+  $shareButton.on('click touchEnd',function(){
+    var href = $(this).attr('href');
+    var timestamp = $(this).attr('timestamp');
+    socket.emit(href, timestamp);
+    return false;
+  });
+
+  $endButton.on('click touchEnd',function(){
+    var href = $(this).attr('href');
+    socket.emit(href);
+    return false;
+  });
+
+  
 
   $form.on('submit', function(){
     var value = $(this).serializeArray();
@@ -34,32 +50,31 @@ $(document).ready(function(){
   });
 
   socket.on('semaphoreStart', function(value){
-    //info = dataInfo;
-    //console.log(info);
     showOnly($semaphore);
     showLetter(value);
   });
 
   socket.on('/states/captured', function(done, next){
-    console.log('next:',next);
     showOnly($semaphore);
     showLetter(next);
   });
 
-  //TODO url
-  socket.on('semaphoreEnd', function(){
-    // var url = info.url;
+  //TODO qrcodeは googleを使う
+  socket.on('semaphoreEnd', function(path, timestamp){
+    var url = 'http://' + location.host + path;
     // var qrcode = info.qrcode;
-    // $url.html(url);
-    // $qrcode.attr('src', qrcode);
+    $url.html(url);
+    $shareButton.attr('timestamp', timestamp);
+    var qrcode = 'http://chart.apis.google.com/chart?chs='+qrSize+'x'+qrSize+'&cht=qr&chl='+url;
+    $qrcode.attr('src', qrcode);
     showOnly($end);
   });
 
-  socket.on('share', function(info){
+  socket.on('shared', function(info){
     alert('shareしました。');
   });
 
-  socket.on('end',function(info){
+  socket.on('ended',function(info){
     info = undefined;
     showOnly($front);
   });
@@ -76,6 +91,5 @@ $(document).ready(function(){
     $('.letter').hide();
     $('#'+letter).show();
   }
-
 
 });

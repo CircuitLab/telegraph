@@ -37,4 +37,3 @@ fs.readdirSync(schema).forEach(function(filename) {
   var name = morph.toUpperCamel( path.basename(filename, '.js') );
   exports[name] = db.model(name, require(path.join(schema, filename)));
 });
-
