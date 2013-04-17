@@ -15,21 +15,19 @@ $(document).ready(function(){
   var $input = $('#input');
 
   $startButton.on('click touchEnd',function(){
-    var href = $(this).attr('href');
-    socket.emit(href);
+    socket.emit('start');
     return false;
   });
 
   $shareButton.on('click touchEnd',function(){
-    var href = $(this).attr('href');
     var timestamp = $(this).attr('timestamp');
-    socket.emit(href, timestamp);
+    socket.emit('share', timestamp);
     return false;
   });
 
   $endButton.on('click touchEnd',function(){
-    var href = $(this).attr('href');
-    socket.emit(href);
+    console.log('href:',$(this).attr('href'));
+    socket.emit('end');
     return false;
   });
 
