@@ -11,7 +11,7 @@ exports.show = function(req, res) {
     if(err) return res.send(404);
     res.render('play/show', 
       { 
-        title: 'デバタイプ', 
+        title: play.message, 
         message: play.message,
         imgUrl: play.gifUrl(),
     });
