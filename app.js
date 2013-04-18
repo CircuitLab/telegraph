@@ -41,7 +41,7 @@ app.get('/', routes.front.index);
 //TODO routes.play.show
 app.get('/plays/:timestamp', routes.play.show);
 app.get('/plays/:timestamp/animation', routes.play.animation);
-
+app.get('/debug/play/show', routes.play.debug);
 app.get('/admin', routes.admin.index);
 // app.get('/trials/:id');
 // app.post('/trials/:id/pictures', function(req, res) {

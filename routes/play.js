@@ -27,3 +27,12 @@ exports.animation = function(req, res){
     res.send(play.animation);
   });
 }
+
+exports.debug = function(req, res) {
+    res.render('play/show', 
+      { 
+        title: 'daichi', 
+        message: 'daichi',
+        imgUrl: 'https://dl.dropbox.com/u/27652974/1366182330368.gif',
+    });
+};
