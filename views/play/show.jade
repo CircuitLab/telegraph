@@ -1,15 +1,14 @@
 doctype 5
-html
+html(xmlns:fb='http://ogp.me/ns/fb#')
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/play/show.css')
     <meta property="og:title" content="Future Semaphore" />
     <meta property="og:site_name" content="Future Semaphore" />
     <meta property="og:description" content="フューチャー・セマフォア 手旗通信の未来"/>
-    <meta property="og:type" content="web" />
-    <meta property="og:image" content="" />
+    <meta property="og:type" content="website" />
     meta(property="og:image", content=imgUrl)
-    <meta property="fb:app_id" content="" />
+    <meta property="fb:app_id" content="442657635826795" />
     script(src='/scripts/jquery-1.9.1.min.js')
     script(src='/scripts/play/show.js')
   body
@@ -27,6 +26,7 @@ html
           <a href="https://twitter.com/share" class="twitter-share-button" data-lang="ja" data-size="large" data-hashtags="futuresemaphore">ツイート</a>
           <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
         .facebook
-          'facebook'
+          <fb:like send="false" layout="box_count" width="450" show_faces="false"></fb:like>
 
-
+    <div id="fb-root"></div>
+    <script>(function(e,t,n){var r,i=e.getElementsByTagName(t)[0];if(e.getElementById(n))return;r=e.createElement(t);r.id=n;r.src="//connect.facebook.net/en_GB/all.js#xfbml=1&appId=442657635826795";i.parentNode.insertBefore(r,i)})(document,"script","facebook-jssdk")</script>
