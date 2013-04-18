@@ -27,6 +27,10 @@ $(document).ready(function(){
 
   $shareButton.on('click',function(){
     if($(this).hasClass('disabled')){ return false;};
+    
+    if( !( confirm('tumblrの特設サイトに投稿されますが\nよろしいですか？') ) ){
+      return false;
+    }
 
     var timestamp = $(this).attr('timestamp');
     $endButton.addClass('disabled');
@@ -37,6 +41,10 @@ $(document).ready(function(){
 
   $endButton.on('click',function(){
     if($(this).hasClass('disabled')){ return false;};
+
+    if( !confirm('終了します。\nよろしいですか？') ){
+      return false;
+    }
 
     console.log('href:',$(this).attr('href'));
     socket.emit('end');
