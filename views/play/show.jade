@@ -1,0 +1,24 @@
+doctype 5
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/play/show.css')
+    script(src='/scripts/jquery-1.9.1.min.js')
+    script(src='/scripts/play/show.js')
+  body
+    .content
+      .title 
+        h1 Future Semaphore
+      .animation
+        img(src=imgUrl)
+      .message
+        | your message : 
+        =message
+
+      //- .share
+      //-   .twitter
+      //-     'twitter'
+      //-   .facebook
+      //-     'facebook'
+
+
