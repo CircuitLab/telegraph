@@ -98,8 +98,7 @@ $(document).ready(function(){
   });
 
   socket.on('semaphoreEnd', function(path, timestamp){
-    var url = 'http://teba.uniba.jp' +  + path;
-    // var qrcode = info.qrcode;
+    var url = 'http://teba.uniba.jp' + path;
     $url.html(url);
     $shareButton.attr('timestamp', timestamp);
     var qrcode = 'http://chart.apis.google.com/chart?chs='+qrSize+'x'+qrSize+'&cht=qr&chl='+url;
