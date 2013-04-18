@@ -28,7 +28,7 @@ $(document).ready(function(){
   $shareButton.on('click',function(){
     if($(this).hasClass('disabled')){ return false;};
     
-    if( !( confirm('tumblrの特設サイトに投稿されますが\nよろしいですか？') ) ){
+    if( !( confirm('tumblrの特設サイトに投稿されます。\nよろしいですか？') ) ){
       return false;
     }
 
