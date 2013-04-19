@@ -13,20 +13,21 @@ html(xmlns:fb='http://ogp.me/ns/fb#')
     script(src='/scripts/play/show.js')
   body
     .content
-      .title 
-        h1 Future Semaphore
+      .title
+        h1
+          img(src='/img/semaphore_logo@2x.png');
       .animation
         img(src=imgUrl)
       .message
-        | your message : 
+        | Your message:&nbsp;
         =message
 
       .share
-        .twitter
-          <a href="https://twitter.com/share" class="twitter-share-button" data-lang="ja" data-size="large" data-hashtags="futuresemaphore">ツイート</a>
+        .twitter.sns
+          <a href="https://twitter.com/share" class="twitter-share-button" data-lang="ja" data-hashtags="futuresemaphore">ツイート</a>
           <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        .facebook
-          <fb:like send="false" layout="box_count" width="450" show_faces="false"></fb:like>
+        .facebook.sns
+          <fb:like send="false" layout="button_count" width="150" show_faces="false"></fb:like>
 
     <div id="fb-root"></div>
     <script>(function(e,t,n){var r,i=e.getElementsByTagName(t)[0];if(e.getElementById(n))return;r=e.createElement(t);r.id=n;r.src="//connect.facebook.net/en_GB/all.js#xfbml=1&appId=442657635826795";i.parentNode.insertBefore(r,i)})(document,"script","facebook-jssdk")</script>
