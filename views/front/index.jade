@@ -6,15 +6,15 @@ block content
       #hand
         img#handImg(src='/img/hand@2x.png')
       #title
-        テバタイプ
+        img(src='/img/0_top/logo@2x.png')
       a#startButton(href='start')
         img#startBtnImg(src='/img/startBtn@2x.png')
   #input
     .content
       #instruct
-        メッセージを入力してください。
+        img(src='/img/1_input_message/please@2x.png')
       #restriction
-       （10文字まで）
+        img(src='/img/1_input_message/limit@2x.png')
       form(method='post', action='message')
         #inputArea
           input#inputText(type='text', name='message', maxlength='10')
@@ -23,15 +23,15 @@ block content
   #semaphore
     .content
       -letters.forEach(function(letter){
-        div.letter(value=letter, id=letter) 
+        div.letter(value=letter, id=letter)
           =letter
       -});
   #end
     .content
       #thanks.thanks
-        ありがとうございました
+        img(src='/img/3_thankyou/thankYou@2x.png')
       #guidance
-        以下のアドレスから画像を確認出来ます。
+        img(src='/img/3_thankyou/check@2x.png')
       .generatedLink
         #url
           http://exsample.com

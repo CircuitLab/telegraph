@@ -27,7 +27,7 @@ $(document).ready(function(){
 
   $shareButton.on('click',function(){
     if($(this).hasClass('disabled')){ return false;};
-    
+
     if( !( confirm('tumblrの特設サイトに投稿されます。\nよろしいですか？') ) ){
       return false;
     }
@@ -146,4 +146,12 @@ $(document).ready(function(){
     $('#'+letter).show();
   }
 
+  // keyboard hide
+  $('#input form').on('submit', _submit);
+
+  function _submit(e){
+    e.preventDefault();
+    var $text = $('#inputText');
+    $text.blur();
+  };
 });
